@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎯 Time of socials – Stay Away From Social Media</title>
+  <style>
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #d7f3e3, #a8c8a3);
+      background-size: 300% 300%;
+      animation: gradientMove 10s ease infinite;
+      color: #2e4d2b;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h1 {
+      color: #2e4d2b;
+      font-size: 2.2em;
+      margin-bottom: 5px;
+      text-shadow: 0 0 10px rgba(76, 117, 71, 0.3);
+      animation: fadeInDown 1.5s ease;
+    }
+
+    #timer {
+      font-size: 3.5em;
+      margin: 10px 0;
+      font-weight: bold;
+      color: #2e4d2b;
+      animation: pulse 2s infinite alternate;
+    }
+
+    .button-group {
+      margin-top: 10px;
+      animation: fadeIn 2s ease;
+    }
+
+    button {
+      background-color: #5c8d57;
+      color: white;
+      font-weight: bold;
+      padding: 10px 25px;
+      margin: 6px;
+      font-size: 1em;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px #2e4d2b;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: #6fae69;
+      transform: translateY(-2px);
+    }
+
+    .stats {
+      margin-top: 10px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 12px;
+      padding: 8px 15px;
+      display: inline-block;
+      animation: slideUp 1.5s ease;
+      border: 2px solid #2e4d2b;
+    }
+
+    .progress-container {
+      background: rgba(255,255,255,0.4);
+      border-radius: 30px;
+      overflow: hidden;
+      margin: 15px auto;
+      width: 80%;
+      max-width: 400px;
+      height: 22px;
+      border: 2px solid #2e4d2b;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, #6fae69, #8ac58a);
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease-in-out;
+    }
+
+    .badge {
+      margin-top: 15px;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #2e4d2b;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #a8c8a3; }
+      to { text-shadow: 0 0 20px #c4e3c0; }
+    }
+
+    .level-up {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #6fae69;
+      color: white;
+      padding: 20px 40px;
+      border-radius: 20px;
+      font-size: 1.6em;
+      font-weight: bold;
+      display: none;
+      animation: pop 0.8s ease-out;
+      z-index: 999;
+      box-shadow: 0 0 10px rgba(47, 74, 45, 0.4);
+    }
+
+    @keyframes pop {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+      50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    /* Owl Motivator */
+    .owl-container {
+      position: fixed;
+      bottom: 80px;
+      right: 50px;
+      display: flex;
+      align-items: flex-end;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    .owl {
+      font-size: 4em;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .speech-bubble {
+      position: relative;
+      background: #f2f7f1;
+      color: #2e4d2b;
+      border-radius: 12px;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      max-width: 220px;
+      font-size: 0.9em;
+      font-style: italic;
+      opacity: 0;
+      transform: translateX(30px);
+      border: 2px solid #4d7a49;
+      transition: all 0.6s ease;
+    }
+
+    .speech-bubble.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .speech-bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      right: 20px;
+      border-width: 10px 10px 0;
+      border-style: solid;
+      border-color: #f2f7f1 transparent;
+      display: block;
+      width: 0;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      font-size: 0.8em;
+      color: #2e4d2b;
+      opacity: 0.7;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      from { text-shadow: 0 0 10px rgba(111,174,105,0.4); }
+      to { text-shadow: 0 0 20px #6fae69; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(60px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+     .back-button {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            background: #2e7031;
+            color: #e6f4ea;
+            border: 1px solid #a1887f;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            z-index: 1000;
+        }
+        .back-button:hover {
+            background: #388e3c;
+        }
+  </style>
+</head>
+<body>
+  <h1>🎮Time of socials</h1>
+  <p>Earn points the longer you stay away from social media!</p>
+
+  <div id="timer">00:00:00</div>
+
+  <div class="button-group">
+    <button id="startBtn">Start</button>
+    <button id="pauseBtn" disabled>Pause</button>
+    <button id="resetBtn" disabled>Stop</button>
+    <a href="totalpoint.html">
+      <button style="background:#8ac58a; color:#2e4d2b;">🏅 Scoreboard</button>
+    </a>
+  </div>
+
+  <div class="stats">
+    <p>🏆 Points: <span id="points">0</span></p>
+    <p>🔥 Level: <span id="level">1</span></p>
+    <p>📅 Streak: <span id="streak">0</span> days</p>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progress"></div>
+  </div>
+
+  <div class="badge" id="badge">🌱 Beginner Mode</div>
+
+  <div class="level-up" id="levelUp">LEVEL UP! ⚡</div>
+
+  <!-- Owl Motivator -->
+  <div class="owl-container">
+    <div class="speech-bubble" id="speech"></div>
+    <div class="owl">🦉</div>
+  </div>
+
+   <a href="index.html" id="backButton" class="back-button">← Back</a>
+    <div class="container">
+
+
+  <footer>Stay focused & grow stronger 🌿</footer>
+
+  <script>
+    let startTime, interval;
+    let elapsed = 0;
+    let points = 0;
+    let level = 1;
+    let streak = 0;
+    let lastLogin = localStorage.getItem("lastLogin");
+    let savedPoints = localStorage.getItem("points");
+    let savedLevel = localStorage.getItem("level");
+    let savedStreak = localStorage.getItem("streak");
+
+    const timerDisplay = document.getElementById("timer");
+    const pointsDisplay = document.getElementById("points");
+    const levelDisplay = document.getElementById("level");
+    const streakDisplay = document.getElementById("streak");
+    const badgeDisplay = document.getElementById("badge");
+    const progressBar = document.getElementById("progress");
+    const speech = document.getElementById("speech");
+    const levelUpDisplay = document.getElementById("levelUp");
+
+    const startBtn = document.getElementById("startBtn");
+    const pauseBtn = document.getElementById("pauseBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    const quotes = [
+      "Discipline is the bridge between goals and achievement.",
+      "You control your mind, not your feed.",
+      "Every minute you focus is a victory.",
+      "Stay consistent, not perfect.",
+      "Social media will wait — your dreams won’t!",
+      "Silence distractions, amplify focus."
+    ];
+
+    const ding = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_b52d47bdfb.mp3?filename=correct-2-46134.mp3");
+
+    if (savedPoints) points = parseInt(savedPoints);
+    if (savedLevel) level = parseInt(savedLevel);
+    if (savedStreak) streak = parseInt(savedStreak);
+
+    pointsDisplay.textContent = points;
+    levelDisplay.textContent = level;
+    streakDisplay.textContent = streak;
+
+    const today = new Date().toDateString();
+    if (lastLogin !== today) {
+      streak += 1;
+      localStorage.setItem("lastLogin", today);
+      localStorage.setItem("streak", streak);
+      streakDisplay.textContent = streak;
+    }
+
+    function showQuote() {
+      const q = quotes[Math.floor(Math.random() * quotes.length)];
+      speech.textContent = `"${q}"`;
+      speech.classList.add("show");
+      setTimeout(() => speech.classList.remove("show"), 7000);
+    }
+    showQuote();
+    setInterval(showQuote, 20000);
+
+    function formatTime(seconds) {
+      const hrs = Math.floor(seconds / 3600);
+      const mins = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+      return [hrs, mins, secs].map(v => v < 10 ? "0" + v : v).join(":");
+    }
+
+    function updateTimer() {
+      const now = Date.now();
+      elapsed = Math.floor((now - startTime) / 1000);
+      timerDisplay.textContent = formatTime(elapsed);
+      updateGamification();
+    }
+
+    function showLevelUp() {
+      levelUpDisplay.style.display = "block";
+      ding.play();
+      setTimeout(() => levelUpDisplay.style.display = "none", 1500);
+    }
+
+    function updateGamification() {
+      points = Math.floor(elapsed / 60);
+      const newLevel = Math.floor(points / 5) + 1;
+      if (newLevel > level) {
+        level = newLevel;
+        showLevelUp();
+      }
+
+      pointsDisplay.textContent = points;
+      levelDisplay.textContent = level;
+
+      const progress = (points % 5) / 5 * 100;
+      progressBar.style.width = progress + "%";
+
+      if (points < 5) badgeDisplay.textContent = "🌱 Beginner Mode";
+      else if (points < 15) badgeDisplay.textContent = "💪 Focus Warrior";
+      else if (points < 30) badgeDisplay.textContent = "🔥 Social Media Slayer";
+      else if (points < 60) badgeDisplay.textContent = "⚡ Mind Master";
+      else badgeDisplay.textContent = "👑 Digital Zen Master";
+
+      localStorage.setItem("points", points);
+      localStorage.setItem("level", level);
+    }
+
+    startBtn.addEventListener("click", () => {
+      startTime = Date.now() - (elapsed * 1000);
+      interval = setInterval(updateTimer, 1000);
+      startBtn.disabled = true;
+      pauseBtn.disabled = false;
+      resetBtn.disabled = false;
+    });
+
+    pauseBtn.addEventListener("click", () => {
+      clearInterval(interval);
+      startBtn.disabled = false;
+      pauseBtn.disabled = true;
+    });
+
+    resetBtn.addEventListener("click", () => {
+      clearInterval(interval);
+      elapsed = 0;
+      timerDisplay.textContent = "00:00:00";
+      startBtn.disabled = false;
+      pauseBtn.disabled = true;
+      resetBtn.disabled = true;
+      localStorage.removeItem("points");
+      localStorage.removeItem("level");
+      points = 0;
+      level = 1;
+      updateGamification();
+    });
+  </script>
+</body>
+</html>

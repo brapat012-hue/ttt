@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #e6f4ea; margin: 0; padding: 0; }
+        .container { max-width: 400px; margin: 40px auto; background: #fffbe6; padding: 24px; border-radius: 12px; box-shadow: 0 2px 12px rgba(101,67,33,0.1); }
+        .toggle-btns { display: flex; justify-content: center; gap: 12px; margin-bottom: 18px; }
+        .section { display: none; }
+        .section.active { display: block; }
+        h2 { text-align: center; color: #388e3c; }
+        form { margin-bottom: 24px; }
+        label { display: block; margin-bottom: 6px; color: #4e3b1f; }
+        input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 8px; margin-bottom: 12px; border: 1px solid #a1887f; border-radius: 6px; }
+        button { background: #388e3c; color: #fffbe6; border: 0; border-radius: 6px; padding: 8px 16px; cursor: pointer; font-size: 16px; width: 100%; }
+        button:hover { background: #2e7031; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="toggle-btns">
+            <button type="button" onclick="showSection('login')">Login</button>
+            <button type="button" onclick="showSection('register')">Register</button>
+        </div>
+        <div id="login" class="section active">
+            <h2>Login</h2>
+            <form>
+                <label for="loginUsername">Username</label>
+                <input type="text" id="loginUsername" name="loginUsername" required>
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="loginPassword" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <div id="register" class="section">
+            <h2>Register</h2>
+            <form>
+                <label for="regUsername">Username</label>
+                <input type="text" id="regUsername" name="regUsername" required>
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" name="regEmail" required>
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" name="regPassword" required>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Hardcoded users and password
+        const users = [
+            "Kabelo",
+            "Nozi",
+            "Nico",
+            "Tokoto",
+            "Anthony",
+            "Cassydy"
+        ];
+        const password = "12345";
+
+        function showSection(section) {
+            document.getElementById('login').classList.remove('active');
+            document.getElementById('register').classList.remove('active');
+            document.getElementById(section).classList.add('active');
+        }
+
+        // Login form handler
+        document.querySelector('#login form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value.trim();
+            const pwd = document.getElementById('loginPassword').value;
+            if (users.map(u => u.toLowerCase()).includes(username.toLowerCase()) && pwd === password) {
+                window.location.href = 'Welcomepage.html';
+            } else {
+                alert('Error: Invalid username or password.');
+            }
+        });
+    </script>
+</body>
+</html>

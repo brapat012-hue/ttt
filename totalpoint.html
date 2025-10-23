@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Total Points</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #e8f5e9);
+      color: #2e4d2b;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #1b5e20;
+    }
+    .points-box {
+      display: inline-block;
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 20px 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .points-box p {
+      font-size: 1.2em;
+      margin: 8px 0;
+    }
+    .total {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #2e7d32;
+    }
+    button {
+      margin-top: 25px;
+      background: #388e3c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2e7031;
+    }
+
+     .back-button {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            background: #2e7031;
+            color: #e6f4ea;
+            border: 1px solid #a1887f;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            z-index: 1000;
+        }
+        .back-button:hover {
+            background: #388e3c;
+        }
+  </style>
+</head>
+<body>
+  <h1>🌟 Your Total Points Summary 🌟</h1>
+  <div class="points-box">
+    <p>📝 Journal Points: <span id="journalPoints">0</span></p>
+    <p>🧘 Breathing Exercise Points: <span id="breathingPoints">0</span></p>
+    <p>📵 Stay Away from Socials Points: <span id="socialPoints">0</span></p>
+    <hr>
+    <p class="total">🏆 Total Points: <span id="totalPoints">0</span></p>
+  </div>
+
+  <a href="index.html" id="backButton" class="back-button">← Back</a>
+    <div class="container">
+
+
+  <br>
+  <button onclick="clearAll()">Clear All Points</button>
+
+  <script>
+    // Get individual points
+    const journalPoints = parseInt(localStorage.getItem('journalPoints')) || 0;
+
+    // Breathing exercise: total minutes = total points
+    const breathingData = JSON.parse(localStorage.getItem('breathingScores')) || [];
+    let breathingPoints = 0;
+    breathingData.forEach(s => {
+      if (typeof s === 'object' && s.seconds) {
+        breathingPoints += Math.floor(s.seconds / 60);
+      } else if (typeof s === 'number') {
+        breathingPoints += s;
+      }
+    });
+
+    // Social media points
+    const socialPoints = parseInt(localStorage.getItem('points')) || 0;
+
+    // Calculate total
+    const totalPoints = journalPoints + breathingPoints + socialPoints;
+
+    // Display on page
+    document.getElementById('journalPoints').textContent = journalPoints;
+    document.getElementById('breathingPoints').textContent = breathingPoints;
+    document.getElementById('socialPoints').textContent = socialPoints;
+    document.getElementById('totalPoints').textContent = totalPoints;
+
+    // Optional: Clear all points function
+    function clearAll() {
+      if (confirm('Are you sure you want to clear ALL points from all sections?')) {
+        localStorage.removeItem('journalPoints');
+        localStorage.removeItem('breathingScores');
+        localStorage.removeItem('points');
+        alert('All points cleared! Reloading...');
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>
